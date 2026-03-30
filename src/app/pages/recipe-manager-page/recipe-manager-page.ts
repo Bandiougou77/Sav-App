@@ -62,7 +62,9 @@ recetteSelectionnee: any;
       }
     });
   }
-
+fermerModale(){
+  
+}
 
 }
 

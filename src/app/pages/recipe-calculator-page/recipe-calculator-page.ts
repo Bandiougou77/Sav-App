@@ -1,4 +1,4 @@
-import { Recette } from '../../models/recette.model'; 
+import { Recette } from '../../models/recette.model';
 import { Component, Inject } from '@angular/core';
 import { RecetteService } from '../../services/recette.service';
 
@@ -14,15 +14,15 @@ import { RecetteService } from '../../services/recette.service';
 })
 export class RecipeCalculatorPage {
 
-  public recetteAffichee: RecetteService | null = null;
+  public recetteAffichee: Recette | null = null;
 
-  constructor(@Inject(RecetteService) private recetteService: RecetteService) {}
+  constructor(@Inject(RecetteService) private recetteService: RecetteService) { }
 
-  calculerRecette(recetteEnvoyee: RecetteService): void {
+  calculerRecette(recetteEnvoyee: Recette): void {
 
-    this.recetteService.createRecette(recetteEnvoyee  ).subscribe({
+    this.recetteService.createRecette(recetteEnvoyee).subscribe({
 
-      next: (recette: RecetteService) => {
+      next: (recette: Recette) => {
         this.recetteAffichee = recette;
         alert("Recette calculée et enregistrée avec succès !");
       },
