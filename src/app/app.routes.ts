@@ -1,4 +1,3 @@
-
 import { Routes } from '@angular/router';
 import { AboutPage } from './pages/about-page/about-page';
 import { HomePage } from './pages/home-page/home-page';
@@ -10,27 +9,19 @@ import { RecipeManagerPage } from './pages/recipe-manager-page/recipe-manager-pa
 import { UsersManagerPage } from './pages/users-manager-page/users-manager-page';
 import { IngredientsManagerPage } from './pages/ingredients-manager-page/ingredients-manager-page';
 import { LegalNoticePage } from './pages/legal-notice-page/legal-notice-page';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
-    // Accès & redirection vers la page home :
-    { path: '', pathMatch: 'full', redirectTo: 'home' }, // Route de la racine :
-    { path: 'home', component: HomePage },
-    // Pages d'authentification :
-    { path: 'login', component: LoginPage },
-    { path: 'subscribe', component: SubscribePage },
-    // Compte utilisateur :
-    { path: 'account', component: AccountManagerPage },
-    // Recettes :
-    { path: 'recipe-calculator', component: RecipeCalculatorPage },
-    { path: 'recipe-manager', component: RecipeManagerPage },
-    // Administration - Gestion :
-    { path: 'users-manager', component: UsersManagerPage },
-    { path: 'ingredients-manager', component: IngredientsManagerPage },
-    // A propos (redirection vers home en cas d'url invalide):
-    { path: "about", component: AboutPage }, // Toujours mis en dernier !
-    // Mentions légales :
-    {path:"mention-legales",component:LegalNoticePage},
-    
-    
-    
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: 'home', component: HomePage },
+  { path: 'login', component: LoginPage },
+  { path: 'subscribe', component: SubscribePage },
+  { path: 'account', component: AccountManagerPage, canActivate: [authGuard] },
+  { path: 'recipe-calculator', component: RecipeCalculatorPage },
+  { path: 'recipe-manager', component: RecipeManagerPage, canActivate: [authGuard] },
+  { path: 'users-manager', component: UsersManagerPage, canActivate: [authGuard] },
+  { path: 'ingredients-manager', component: IngredientsManagerPage, canActivate: [authGuard] },
+  { path: 'about', component: AboutPage },
+  { path: 'mention-legales', component: LegalNoticePage },
+  { path: '**', redirectTo: 'home' }
 ];

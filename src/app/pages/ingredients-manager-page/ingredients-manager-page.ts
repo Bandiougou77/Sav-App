@@ -1,29 +1,32 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Ingredient } from '../../models/ingredient.model';
 import { IngredientService } from '../../services/ingredient.service';
-import { FormsModule } from '@angular/forms'; // À AJOUTER
+
 @Component({
   selector: 'app-ingredients-manager-page',
-  imports: [CommonModule, FormsModule], // AJOUTER FormsModule pour le [(ngModel)]
+  imports: [CommonModule, FormsModule],
   templateUrl: './ingredients-manager-page.html',
   styleUrl: './ingredients-manager-page.css',
 })
 export class IngredientsManagerPage implements OnInit {
   public ingredients: Ingredient[] = [];
-  // Objet temporaire pour l'ajout ou la modification
   public ingredientSelectionne: Ingredient | null = null;
-  constructor(private ingredientService: IngredientService) { }
+
+  constructor(private ingredientService: IngredientService) {}
+
   ngOnInit(): void {
     this.getIngredients();
   }
+
   getIngredients(): void {
     this.ingredientService.getIngredients().subscribe({
       next: (data) => this.ingredients = data,
       error: (err) => console.error("Erreur API : ", err)
     });
   }
-  /** Préparer l'ajout d'un nouvel ingrédient (ligne vide) */
+
   creerNouvelIngredient(): void {
     this.ingredientSelectionne = {
       id: 0, nom: '', sapo: 0, ins: 0, iode: 0,
@@ -32,30 +35,29 @@ export class IngredientsManagerPage implements OnInit {
       estCorpsGras: true
     };
   }
-  /** Lancer l'édition d'une ligne existante */
+
   editerIngredient(item: Ingredient): void {
-    // On crée une copie pour éviter de modifier le tableau original avant validation
     this.ingredientSelectionne = { ...item };
   }
-  /** Enregistrer (Ajout ou Update) */
+
   saveIngredient(): void {
     if (!this.ingredientSelectionne) return;
-
     const action = this.ingredientSelectionne.id === 0
       ? this.ingredientService.addIngredient(this.ingredientSelectionne)
       : this.ingredientService.updateIngredient(this.ingredientSelectionne);
     action.subscribe({
       next: () => {
         this.ingredientSelectionne = null;
-        this.getIngredients(); // Rafraîchir la liste
+        this.getIngredients();
       }
     });
   }
-  /** Supprimer un ingrédient */
+
   deleteIngredient(id: number): void {
     if (confirm("Supprimer cet ingrédient ?")) {
       this.ingredientService.deleteIngredient(id).subscribe(() =>
-        this.getIngredients());
+        this.getIngredients()
+      );
     }
   }
 }
