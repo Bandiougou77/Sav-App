@@ -90,7 +90,8 @@
             ],
             "styles": [
               "src/styles.css"
-            ]
+            ],
+            "browsers": "ChromeHeadless"
           }
         },
         "deploy": {
@@ -98,5 +99,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

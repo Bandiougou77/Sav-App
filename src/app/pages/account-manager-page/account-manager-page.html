@@ -1,1 +1,97 @@
-<p>account-manager-page works!</p>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="mb-4">Gestion de mon compte</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Informations personnelles</h5>
+        </div>
+        <div class="card-body">
+          <p><strong>Nom d'utilisateur:</strong> {{ user?.username }}</p>
+          <p><strong>Email:</strong> {{ user?.email }}</p>
+          <p><strong>Rôle:</strong> {{ user?.role }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Actions disponibles</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <div class="card h-100">
+                <div class="card-body text-center">
+                  <i class="bi bi-calculator fs-1 text-primary mb-3"></i>
+                  <h6>Calculateur de recettes</h6>
+                  <a routerLink="/recipe-calculator" class="btn btn-primary btn-sm">
+                    Accéder
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <div class="card h-100">
+                <div class="card-body text-center">
+                  <i class="bi bi-book fs-1 text-success mb-3"></i>
+                  <h6>Mes recettes</h6>
+                  <a routerLink="/recipe-manager" class="btn btn-success btn-sm">
+                    Gérer
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <div class="card h-100">
+                <div class="card-body text-center">
+                  <i class="bi bi-boxes fs-1 text-info mb-3"></i>
+                  <h6>Ingrédients</h6>
+                  <a routerLink="/ingredients-manager" class="btn btn-info btn-sm">
+                    Gérer
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <div class="card h-100">
+                <div class="card-body text-center">
+                  <i class="bi bi-people fs-1 text-warning mb-3"></i>
+                  <h6>Utilisateurs</h6>
+                  <a routerLink="/users-manager" class="btn btn-warning btn-sm">
+                    Gérer
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header bg-danger text-white">
+          <h5 class="card-title mb-0">Zone de danger</h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted">Actions irréversibles</p>
+          <button class="btn btn-outline-danger" (click)="logout()">
+            <i class="bi bi-box-arrow-right"></i> Se déconnecter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
